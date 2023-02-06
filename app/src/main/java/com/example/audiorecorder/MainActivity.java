@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private ImageButton micButton;
     private TextView outputText;
-
+    private boolean isRecording = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,18 +23,15 @@ public class MainActivity extends AppCompatActivity {
         micButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Button Pressed", Toast.LENGTH_SHORT).show();
-                outputText.setText("Recording you sweet voice <3");
+                if(!isRecording) {
+                    Toast.makeText(MainActivity.this, "Started Recording", Toast.LENGTH_SHORT).show();
+                    isRecording = true;
+                }else {
+                    Toast.makeText(MainActivity.this, "Stopped Recording", Toast.LENGTH_SHORT).show();
+                }
             }
+                
+        });
 
-        });
-        micButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Button Pressed", Toast.LENGTH_SHORT).show();
-                outputText.setText("Recording Stopped :(");
-            }
-        });
-        
     }
 }
