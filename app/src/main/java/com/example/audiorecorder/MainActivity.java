@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         
         micButton = findViewById(R.id.micButton);
         outputText = findViewById(R.id.outputText);
-        micButton.setOnClickListener(new View.OnClickListener() {
+        micButton.setOnClickListener(new View.OnClickListener() {//to display start and stop recording messages
             @Override
             public void onClick(View view) {
                 if(!isRecording) {
@@ -28,10 +28,13 @@ public class MainActivity extends AppCompatActivity {
                     isRecording = true;
                 }else {
                     Toast.makeText(MainActivity.this, "Stopped Recording", Toast.LENGTH_SHORT).show();
+                    isRecording = false;
                 }
             }
                 
         });
+
+
 
     }
 }
