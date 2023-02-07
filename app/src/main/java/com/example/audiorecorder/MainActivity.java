@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton micButton;
-    private TextView outputText;
     private boolean isRecording = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         micButton = findViewById(R.id.micButton);
-        outputText = findViewById(R.id.outputText);
         micButton.setOnClickListener(new View.OnClickListener() {//to display start and stop recording messages
             @Override
             public void onClick(View view) {
