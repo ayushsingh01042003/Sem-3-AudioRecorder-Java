@@ -12,6 +12,11 @@
         android:theme="@style/Theme.AudioRecorder"
         tools:targetApi="31">
         <activity
+            android:name=".savedRecordings"
+            android:exported="false"
+            android:label="SavedRecordings0"
+            android:parentActivityName=".MainActivity "/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
