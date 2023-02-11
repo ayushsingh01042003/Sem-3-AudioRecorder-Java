@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     public void openSavedRecordings(View v) {
         Toast.makeText(this, "works", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, savedRecordings.class);
