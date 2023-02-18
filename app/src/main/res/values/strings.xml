@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">AudioRecorder</string>
     <string name="start_pause_recording">Start/Pause recording</string>
+    <string name="save">Save</string>
+    <string name="list">List</string>
 </resources>

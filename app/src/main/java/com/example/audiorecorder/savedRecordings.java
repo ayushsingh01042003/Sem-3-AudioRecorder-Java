@@ -1,6 +1,7 @@
 package com.example.audiorecorder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -11,7 +12,7 @@ import android.widget.ListView;
 import java.util.List;
 
 public class savedRecordings extends AppCompatActivity {
-    ListView listRecordings;
+    RecyclerView listRecordings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
