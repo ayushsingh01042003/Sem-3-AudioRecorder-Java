@@ -1,7 +1,6 @@
 package com.example.audiorecorder;
 
-import static android.app.PendingIntent.getActivity;
-import static java.security.AccessController.getContext;
+import android.Manifest;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.content.Intent;
@@ -12,6 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton micButton;
     private Button saveButton, listRecordingsButton;
     private MediaRecorder recorder;
-    private static final String mFileName = null;
     private boolean isRecording = false;
     private String recordPermission = Manifest.permission.RECORD_AUDIO;
+    private String fileName;
 
 
     @Override
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         micButton = findViewById(R.id.micButton);
-        saveButton = findViewById(R.id.saveButton);
+        //saveButton = findViewById(R.id.saveButton);
         listRecordingsButton = findViewById(R.id.listRecordingsButton);
 
         micButton.setOnClickListener(new View.OnClickListener() {//to display start and stop recording messages
@@ -41,34 +44,67 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Started Recording", Toast.LENGTH_SHORT).show();
                         isRecording = true;
                         //code for recording
+                        startRecording();
                     }
 
                 }else {
-                    Toast.makeText(MainActivity.this, "Paused Recording", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Saved Recording", Toast.LENGTH_SHORT).show();
                     isRecording = false;
                     //code for pause at the last save point so we can continue from there
+                    saveRecording();
                 }
             }
         });
 
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //stop the recording and save it
+//                saveRecording();
+//            }
+//        });
+
 
     }
 
+    private void startRecording() {
+        String filePath = this.getExternalFilesDir("/").getAbsolutePath();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.CANADA);
+        Date date = new Date();
+        fileName = "Recording_"+ formatter.format(date) + ".3gp";
 
-    private void pauseRecording() {
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(filePath+ "/" +fileName);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        recorder.start();
     }
+
+
+//    private void pauseRecording() {
+//        recorder.pause();
+//    }
 
     private void saveRecording () {//hitting the save button will generate the audio file
-
+        recorder.stop();
+        recorder.release();
+        recorder = null;
     }
 
     public boolean checkPermissions() {
         // this method is used to check permission
-        if(ActivityCompat.checkSelfPermission(getContext(), recordPermission) = PackageManager.PERMISSION_GRANTED) {
+        if(ActivityCompat.checkSelfPermission(this, recordPermission) == PackageManager.PERMISSION_GRANTED) {
             return true;
         }else {
-            ActivityCompat.requestPermissions(getActivity(), new String[] {recordPermission}, PERMISSION_CODE );
+            ActivityCompat.requestPermissions(this, new String[] {recordPermission}, PERMISSION_CODE );
             return false;
         }
     }
