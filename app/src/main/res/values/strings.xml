@@ -3,4 +3,7 @@
     <string name="start_pause_recording">Start/Pause recording</string>
     <string name="save">Save</string>
     <string name="list">List</string>
+    <string name="textview">TextView</string>
+    <string name="textview3">TextView</string>
+    <string name="todo">TODO</string>
 </resources>

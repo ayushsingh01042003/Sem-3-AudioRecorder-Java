@@ -41,17 +41,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!isRecording) {
                     if(checkPermissions()) {
+                        startRecording();
                         Toast.makeText(MainActivity.this, "Started Recording", Toast.LENGTH_SHORT).show();
                         isRecording = true;
-                        //code for recording
-                        startRecording();
                     }
 
                 }else {
+                    saveRecording();
                     Toast.makeText(MainActivity.this, "Saved Recording", Toast.LENGTH_SHORT).show();
                     isRecording = false;
-                    //code for pause at the last save point so we can continue from there
-                    saveRecording();
                 }
             }
         });
@@ -111,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void openSavedRecordings(View v) {
-        Toast.makeText(this, "works", Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(MainActivity.this, "Saved Recording", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, savedRecordings.class);
         startActivity(intent);
     }
