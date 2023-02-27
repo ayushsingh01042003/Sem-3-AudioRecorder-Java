@@ -107,10 +107,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onStop() {
+        super.onStop();
+        if(isRecording) {
+            saveRecording();
+        }
+    }
+
 
     public void openSavedRecordings(View v) {
 
-        Toast.makeText(MainActivity.this, "Saved Recording", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "Saved Recording", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, savedRecordings.class);
         startActivity(intent);
     }

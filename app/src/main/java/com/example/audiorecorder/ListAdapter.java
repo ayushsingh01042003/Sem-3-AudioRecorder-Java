@@ -13,9 +13,11 @@ import java.io.File;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.AudioViewHolder> {
     private File[] files;
+    private OnItemListClick onItemListClick;
 
-    public ListAdapter(File[] files) {
+    public ListAdapter(File[] files, OnItemListClick onItemListClick) {
         this.files = files;
+        this.onItemListClick = onItemListClick;
     }
 
     @NonNull
@@ -36,7 +38,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.AudioViewHolde
         return files.length;
     }
 
-    public class AudioViewHolder extends RecyclerView.ViewHolder {
+    public class AudioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView ListIcon;
         private TextView ListTitle;
@@ -48,6 +50,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.AudioViewHolde
             ListIcon = itemView.findViewById(R.id.ListIcon);
             ListTitle = itemView.findViewById(R.id.ListTitle);
             ListDate = itemView.findViewById(R.id.ListDate);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            onItemListClick.onClickListener(files[getAdapterPosition()], getAdapterPosition());
         }
     }
+
+
+    public interface OnItemListClick {
+        void onClickListener(File file, int position);
+    }
+
 }
