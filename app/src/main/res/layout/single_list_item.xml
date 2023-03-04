@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#D3DFE8"
+    android:backgroundTint="#BF758E">
 
     <ImageView
         android:id="@+id/ListIcon"
@@ -11,13 +13,13 @@
         android:layout_height="49dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/presence_audio_away"
-        tools:ignore="ImageContrastCheck"
-        android:contentDescription="@string/todo" />
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/ListTitle"
@@ -25,6 +27,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:text="@string/textview3"
+        android:textColor="#FBFBFB"
         app:layout_constraintStart_toEndOf="@+id/ListIcon"
         app:layout_constraintTop_toTopOf="@+id/ListIcon" />
 
@@ -34,6 +37,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:text="@string/textview"
+        android:textColor="#FAF6F6"
         app:layout_constraintBottom_toBottomOf="@+id/ListIcon"
         app:layout_constraintStart_toEndOf="@+id/ListIcon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

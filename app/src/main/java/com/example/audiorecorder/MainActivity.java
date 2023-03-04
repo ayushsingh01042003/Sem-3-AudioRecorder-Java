@@ -107,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onStop() {
-        super.onStop();
-        if(isRecording) {
-            saveRecording();
-        }
-    }
+//    public void onStop() {
+//        super.onStop();
+//        if(isRecording) {
+//            saveRecording();
+//        }
+//    }
 
 
     public void openSavedRecordings(View v) {

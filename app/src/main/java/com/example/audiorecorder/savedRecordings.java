@@ -54,27 +54,41 @@ public class savedRecordings extends AppCompatActivity implements ListAdapter.On
 
 
     private void playAudio(File fileToPlay) {
-        //play the audio
-        player = new MediaPlayer();
+        // Release the MediaPlayer instance if it is already playing
+        if (player != null && player.isPlaying()) {
+            player.reset();
+        }
 
+        // Play the audio
+        player = new MediaPlayer();
         try {
             player.setDataSource(fileToPlay.getAbsolutePath());
             player.prepare();
             player.start();
+            // Set the OnCompletionListener to release the MediaPlayer when playback is complete
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    player.release();
+                    player = null;
+                    isPlaying = false;
+                }
+            });
+            isPlaying = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        isPlaying = true;
     }
+
 
     private void stopAudio() {
         //Stop the audio
         isPlaying = false;
         player.stop();
     }
-    @Override
-    public void onStop() {
-        super.onStop();
-        stopAudio();
-    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        stopAudio();
+//    }
 }
